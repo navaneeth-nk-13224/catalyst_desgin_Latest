@@ -215,6 +215,9 @@ Full list: `docs/zcatalyst-styles.md`
 | Arrow Left | `107e6552f7200e0fe2e80f07109e343ed57c8c51` |
 | Copy Icon | `bf61e378330f2257af023cb6db96202828cb98a8` |
 | Three Dot Menu | `28ee9e6ed927d74b8a4a08cc0dff4f3439763f73` |
+| **Table (Boxy)** | `f5c2c94ee6b8bddb779ff1d82125cc73b044fdfd` |
+| **Table (Stretch)** | `ccaff166b021b69c24a3e554ea7e10e06c7609b9` |
+| **Pagination** | `826469f58d1a4e68df306ac04da418b009ab9380` |
 
 Full list: `docs/zcatalyst-design-system.md`
 
@@ -408,6 +411,8 @@ Then in the next call, skip built sections and continue from where it stopped.
 9. **Page deletion** — Cannot remove the current page. Switch to another page first, then delete.
 10. **DS file is READ-ONLY** — Never add, build, modify, or change anything in the Design System file. It is a published library — only import components and variables from it.
 11. **Always use DS components over hand-built elements** — If a component exists in the DS (Badges, Table, Tabs, etc.), import it. Never recreate UI elements with raw frames, ellipses, or text — even to save execution time during timeouts. Split work across multiple calls instead.
+12. **NEVER hand-build tables** — Always import the ZCatalyst Table DS component (Boxy: `f5c2c94ee6b8bddb779ff1d82125cc73b044fdfd`, Stretch: `ccaff166b021b69c24a3e554ea7e10e06c7609b9`). The Table is designed so that **each cell variant matches its column header type** (a "Status" header → Status cell variant; a "Name" header → Name cell variant, etc.). Never build tables from raw frames, dividers, or text nodes.
+13. **NEVER hand-build pagination** — Always import the ZCatalyst Pagination DS component (`826469f58d1a4e68df306ac04da418b009ab9380`) and place it directly below the Table instance. Never create custom pagination from buttons, text, or raw frames.
 
 ---
 

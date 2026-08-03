@@ -47,6 +47,10 @@
 
 19. **Always configure Sub Header** — The Sub Header inside the Layout component must NOT be hidden. Set the title via `setText(subH, 'Feature Names', 'Page Title')` and toggle boolean properties (Back Navigation, Primary Tab, Button 1, etc.) as needed for each page. Key: `ef423f31a7636493f6d094a031c0a493a94c5667`.
 
+20. **ALWAYS use the Table DS component — NEVER hand-build tables** — Import the ZCatalyst Table component (`f5c2c94ee6b8bddb779ff1d82125cc73b044fdfd` for Boxy, `ccaff166b021b69c24a3e554ea7e10e06c7609b9` for Stretch). Do NOT create tables from raw frames, text nodes, or dividers. The Table component is a pre-built DS component where each cell variant corresponds to its column header type (e.g. a "Status" column uses the Status cell variant, a "Name" column uses the Name cell variant). Respect this cell-variant-to-header-type relationship when customizing columns.
+
+21. **ALWAYS use the Pagination DS component — NEVER hand-build pagination** — Import the ZCatalyst Pagination component (`826469f58d1a4e68df306ac04da418b009ab9380`). Do NOT build custom pagination with raw frames, buttons, or text nodes. Place the Pagination instance directly below the Table component.
+
 ---
 
 ## Importable Semantic Color Variables
