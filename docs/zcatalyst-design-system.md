@@ -45,64 +45,30 @@
 - **Set Key**: `1e04478db049373eb096060a60ee7bbbc4da4e9a`
 - **Set NodeId**: `728:4636`
 - **Total Variants**: 760
-- Variant axes: Type (Default Button, Split Button, Navigation Buttons), Variant (Fill, Outline, Grey, Ghost, Ghost Grey), Size (Default, Small, Extra Small, Large), Color (Primary, Success, Danger, Grey), Content (Default, Icon Button), State (Default, Button Hover, Split Hover, Disabled, Click, Button Disable, Split Disable), Radius (Default, Rounded)
+- Variant axes: Type (Default Button, Split Button, Navigation Buttons), Variant (Fill, Outline, Grey, Ghost, Ghost Grey), Size (Default, Small, Extra Small, Large), Color (Primary, Success, Danger, Grey), Content (Default, Icon Button), State (Default, Hover, Disabled, Click)
 - Boolean props: `Icon Left`, `Icon Right`
 - Instance swap: `Change Icon Left`, `Change Icon Right`
 - Text node: `Button Text`
 - **Key Variants — Default Button / Default State / Default Radius / Default Content**:
   - Fill/Default/Primary: `30cdc2a5cef8cec1c194d46e4ab7c3670b16703c`
+  - Fill/Small/Primary: `1d41188f2c4cbbda525ef438bfb4af56e9b4f6d8`
+  - Fill/Large/Primary: `eab731bff757d370583ceb1d60a6762e3f0c1e66`
+  - Fill/XS/Primary: `7dac51e9d8051573f6e89b14fc0df4fe39c761d3`
   - Fill/Default/Success: `aaffaad0658f93b5c6a579c4f4a8868ac5808761`
   - Fill/Default/Danger: `a849751b4561433a76f12ea146460863e831cd3f`
-  - Fill/Small/Primary: `1d41188f2c4cbbda525ef438bfb4af56e9b4f6d8`
-  - Fill/Small/Success: `54117ec24ed1a52668560cae9a0b72a7b7979f6e`
-  - Fill/Small/Danger: `dcd67fdc38e0af643aeac834dfc742791a1a823e`
-  - Fill/Large/Primary: `eab731bff757d370583ceb1d60a6762e3f0c1e66`
-  - Fill/Large/Success: `654e78d1fca6e6f5cb74db5a1f9f2dd98a9d9ae0`
-  - Fill/Large/Danger: `1d0c3ad06d6ee019112c1cf0a97e5e02a695b6d9`
-  - Fill/XS/Primary: `7dac51e9d8051573f6e89b14fc0df4fe39c761d3`
-  - Fill/XS/Success: `873219ab10df3a95202cd59c10f3197cda6f2bda`
-  - Fill/XS/Danger: `bd2f9ea6777119a62b5c52d33dc643ddd1a11817`
   - Outline/Default/Primary: `8a0ada51ba975510e367002fad3fdbf6b1770e93`
+  - Outline/Small/Primary: `3ac9534a0d75c6b4f6c38b56cf02f48025b4a7ad`
   - Outline/Default/Success: `6975c2fa0ba6229ac3fef08b015ce2151b2f3161`
   - Outline/Default/Danger: `bd21e6b5caaffd36f537efe493ab15f01384297b`
-  - Outline/Small/Primary: `3ac9534a0d75c6b4f6c38b56cf02f48025b4a7ad`
-  - Outline/Small/Success: `108a9a3dfdddeadb3d15ab4e64daa691d41d2083`
-  - Outline/Small/Danger: `b6d7a8645f0dd1e0bf7911a01f45632624c973a5`
-  - Outline/Large/Primary: `eed566f3b44cd144b8eeed8ed230a6c40ad9e350`
-  - Outline/Large/Success: `e9c38a395f9031be2193de432b14a12f4b3014d5`
-  - Outline/Large/Danger: `5d5881a4b170da13d1521b840993af6b4a75103b`
-  - Outline/XS/Primary: `5dbd065efc9356b3a005797ff020e78428dc8620`
-  - Outline/XS/Success: `0b1ba628f95d18e9239a52bd0d58c4fe6f3dcb27`
-  - Outline/XS/Danger: `850a8d5da3a5ce2dd8295dbf83b258b2b7c6b50b`
   - Ghost/Default/Primary: `9f27ac4d4065cd6a5501cca7481f0b0e4bfad4ba`
-  - Ghost/Default/Success: `4716961ca0001cb6c5c2fea71a131d029d800524`
-  - Ghost/Default/Danger: `6d634bc0a4f7bad58e2d532c5716e98a865c979f`
   - Ghost/Small/Primary: `47859a4a879e25986af3750cc54d2b96dfbb9e98`
-  - Ghost/Small/Success: `a2ce125137308ead9ac0e13d9c4c23a27d7273a6`
-  - Ghost/Small/Danger: `23b5780415c9ca846c05310e6f36c4f4bdb3dff0`
-  - Ghost/Large/Primary: `df7eda8619762c0ebac98377d1bbf283c8417062`
-  - Ghost/Large/Success: `66fece155d9b3f7d0761661f995cdded86df7498`
-  - Ghost/Large/Danger: `037ccf8571d5e0ca64e621b979b2c79061632158`
-  - Ghost/XS/Primary: `10f1f2512a012107763f03cc9960e356b37ff4b8`
-  - Ghost/XS/Success: `894d92bbab1283b07f17d8da0da1280e6ecedc02`
-  - Ghost/XS/Danger: `1f0d3cd3bdbccd53d2ee8edb393eed250d657f5a`
   - Grey/Default/Grey: `7d2a9b1131de612203bcd434c3a330161652ae0c`
   - Grey/Small/Grey: `45915b6c2fe55c7380850805255e3db57237019d`
-  - Grey/Large/Grey: `f1654d90f2cdcbc6356e3ca0c3628af22fd8af92`
-  - Grey/XS/Grey: `51c3e37268d85a8f4131dc8675a58e357ba46b03`
 - **Key Variants — Navigation Buttons (Icon Only, Rounded)**:
   - Ghost/Default/Primary: `3d800282879147a494999e7437cef2e2155f7a64`
-  - Ghost/Large/Primary: `9a1b17969f8b102f2a68764ce2d71b777ef3d626`
   - Ghost/Small/Primary: `911dd576b2e232868e3b3fb113fb903c572a8b00`
-  - Ghost/XS/Primary: `8c1086faf8fafe3acac53b464bb08a8ebd07c329`
   - Grey/Default/Grey: `568c3b1a7fb61109ba1bd556f0b0a74e62f0f700`
-  - Grey/Large/Grey: `306e0a13e381eb5a689cd27f9c077bc920eb9476`
   - Grey/Small/Grey: `f2d06a63c252d949883e8797ce014cd1a344e009`
-  - Grey/XS/Grey: `cd9bc9527297dd8cf331dccc36acf99c959cf5ab`
-  - Ghost Grey/Default/Grey: `a6efb1357640ee7fbc9e9514e6936a718527ce90`
-  - Ghost Grey/Large/Grey: `4ab68e49ae4b5386beb1d15b958dc057892bda83`
-  - Ghost Grey/Small/Grey: `488562e11b9749fcd0f14964b5146a3fce1c4a8b`
-  - Ghost Grey/XS/Grey: `d084f458244fd06330734a49e9eec29efd05b1b7`
 
 ### Text Box (Input Fields)
 - **Set Key**: `411f52c2e02879cd0cd7a259933325c7cbc04b5c`

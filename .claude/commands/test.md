@@ -1,39 +1,30 @@
-# Test Command
+# Audit Screen
 
-Run tests and ensure code quality for the Figma Console MCP server.
+Audit a built Figma screen for ZCatalyst Design System compliance.
 
 ## Instructions
 
-1. **Run Test Suite**
-   ```bash
-   npm test
-   ```
+Run this audit after building any screen:
 
-2. **Watch Mode** (for development)
-   ```bash
-   npm run test:watch
-   ```
+1. **Variable bindings** — run the audit snippet to find any unbound color fills:
+```js
+const det = figma.currentPage.findOne(n => n.name.startsWith('F'));
+const issues = [];
+det.findAll(n => {
+  if ('fills' in n && n.fills?.length) {
+    const f = n.fills[0];
+    if (f.type === 'SOLID' && !f.boundVariables?.color) issues.push(n.name + ' (' + n.id + ')');
+  }
+});
+return issues.length ? 'Unbound: ' + issues.join(', ') : 'All fills bound ✓';
+```
 
-3. **Coverage Report**
-   ```bash
-   npm run test:coverage
-   ```
-
-4. **Test Requirements**
-   - All new code must have tests
-   - Maintain 70%+ coverage threshold
-   - Tests must pass before commits
-   - Use descriptive test names
-
-5. **Test Structure**
-   - Unit tests: `src/**/*.test.ts`
-   - Integration tests: `tests/**/*.test.ts`
-   - Use Jest with ts-jest preset
+2. **Component compliance** — check no raw frames are used as tables/pagination/buttons
+3. **Auto-layout** — every container must have `layoutMode !== 'NONE'`
+4. **Sub Header** — must be configured (title + at least one action button)
 
 ## Example Usage
 
 ```
-/sc:test
+/sc:test Audit the Machine Clusters screen for compliance
 ```
-
-This will run the complete test suite and report results.
