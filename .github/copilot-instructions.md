@@ -179,8 +179,13 @@ async function addComp(parent, compKey, opts = {}) {
   const c = _compCache[compKey] || (_compCache[compKey] = await figma.importComponentByKeyAsync(compKey));
   const i = c.createInstance();
   parent.appendChild(i);
-  // Always default to HUG — DS components (e.g. Dropdown) default to FIXED inside auto-layout
-  i.layoutSizingHorizontal = opts.fill ? 'FILL' : 'HUG';
+  // Buttons/icons default to HUG; Dropdown defaults to FIXED (~160px for filters) — set explicitly
+  if (opts.fill) {
+    i.layoutSizingHorizontal = 'FILL';
+  } else if (opts.width) {
+    i.layoutSizingHorizontal = 'FIXED';
+    i.resize(opts.width, i.height);
+  }
   return i;
 }
 
