@@ -57,11 +57,11 @@
 
 23. **ALL input forms go inside a DS Popup component — always** — ANY user input form (create, edit, configure, upload settings, wizard, etc.) MUST be placed inside a DS Popup/Modal component. Never place a form directly on the page body as a plain card. When a stepper flow is inside a popup, the popup width must be wide enough (800–900px) for the entire stepper to render in a single horizontal row — steppers must never truncate or wrap. Search the DS for the Popup component before building; do NOT hand-build modal overlays.
 
-24. **Section header layout pattern** — Every section card header row must follow this structure:
-    - **LEFT**: A VERTICAL frame (`gap: 4`) containing the title (H5) and a subtitle/description (Body 3) directly below it.
-    - **RIGHT**: Any buttons or search fields placed adjacent in the same HORIZONTAL row, each with `layoutSizingHorizontal = 'HUG'` (auto width — never fixed width on buttons here).
-    - The HORIZONTAL outer row uses `counterAxisAlignItems = 'CENTER'`; the title group uses `layoutSizingHorizontal = 'FILL'` to push actions to the right.
-    - Never place a section title without a subtitle. Never give buttons a fixed width in this context.
+24. **Section header layout pattern — mandatory on every card, section, and toolbar row** — Every card or section that has controls (buttons, dropdowns, search) at the top MUST also have a heading and subtitle. A toolbar row with controls only and no heading is always wrong. The required structure:
+    - **LEFT**: A VERTICAL frame (`gap: 4`) containing the title (H5) and a subtitle/description (Body 3) directly below it. `layoutSizingHorizontal = 'FILL'` on this group pushes controls to the right.
+    - **RIGHT**: Any buttons, dropdowns, or search fields — each with `layoutSizingHorizontal = 'HUG'` (never FILL or fixed width).
+    - The HORIZONTAL outer row uses `counterAxisAlignItems = 'CENTER'`.
+    - Never place controls alone end-to-end with no heading. Never give dropdowns or buttons a FILL width here.
 
 27. **Card/section heading — use H5 or Body 1 (14px) depending on context** — Not every heading needs H5. Choose the right level:
     - **H5** (`be57224f7a8d40f6fb33855456c324c6fdc58adc`) — primary section titles, card titles that need visual weight (e.g. "Repositories", "Starter Templates")
