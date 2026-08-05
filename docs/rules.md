@@ -104,6 +104,8 @@
     ```
     Detection: a frame with correct content that is visually collapsed or invisible has `layoutSizingVertical = 'FIXED'` and `height ≈ 10`. Fix: `frame.layoutSizingVertical = 'HUG'`.
 
+29. **Chip component — always use the "close disabled" variant; only use when necessary** — The ZCatalyst Chip component (key: `2cefc27769a90003228345b03c46e3788dfc35bd`) has variants with and without a close (×) button. Always import the variant where the close button is disabled/hidden unless the use case explicitly requires dismissal. Do not scatter Chips across the UI as decoration — use them only for tags, active filters, or selected multi-value tokens where the label adds real information value.
+
 ---
 
 ## Importable Semantic Color Variables
