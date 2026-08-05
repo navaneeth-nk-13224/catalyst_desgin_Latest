@@ -94,6 +94,14 @@
     | Select row | `Checkbox` | `Check Box` |
     | Enable / Disable toggle | `Toggle Switch` | — |
 
+28. **Always set `layoutSizingVertical` on every frame created by `mkF` or equivalent** — When a VERTICAL auto-layout frame is appended to a parent auto-layout frame, Figma defaults `layoutSizingVertical = 'FIXED'` at the initial creation height (~10px). Setting `primaryAxisSizingMode = 'AUTO'` alone does NOT fix this — the frame collapses and becomes invisible. `layoutSizingVertical` MUST be set explicitly AFTER `parent.appendChild(f)`:
+    ```js
+    parent.appendChild(f);
+    f.layoutSizingHorizontal = 'FILL'; // or 'HUG'
+    f.layoutSizingVertical = 'HUG';    // MUST come after appendChild
+    ```
+    Detection: a frame with correct content that is visually collapsed or invisible has `layoutSizingVertical = 'FIXED'` and `height ≈ 10`. Fix: `frame.layoutSizingVertical = 'HUG'`.
+
 ---
 
 ## Importable Semantic Color Variables
