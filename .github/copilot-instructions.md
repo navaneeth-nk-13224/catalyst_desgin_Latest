@@ -144,6 +144,7 @@ function mkF(parent, opts = {}) {
   f.fills = []; f.clipsContent = false;
   parent.appendChild(f);
   f.layoutSizingHorizontal = opts.fillW !== false ? 'FILL' : 'HUG';
+  f.layoutSizingVertical = opts.fillH ? 'FILL' : 'HUG';
   if (opts.pad) { f.paddingTop = f.paddingBottom = f.paddingLeft = f.paddingRight = opts.pad; }
   if (opts.padX) { f.paddingLeft = f.paddingRight = opts.padX; }
   if (opts.padY) { f.paddingTop = f.paddingBottom = opts.padY; }
