@@ -49,6 +49,9 @@ container.layoutMode = 'VERTICAL';
 container.primaryAxisSizingMode = 'AUTO';
 container.layoutSizingHorizontal = 'FILL';
 container.itemSpacing = 20;
+// MANDATORY: bind container background to containerBg variable (Rule 26)
+const _cBg = await figma.variables.importVariableByKeyAsync('a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02');
+setFill(container, _cBg);
 for (const k of [...container.children]) k.remove();
 // BUILD CONTENT INSIDE container
 ```

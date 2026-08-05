@@ -61,6 +61,13 @@
     - The HORIZONTAL outer row uses `counterAxisAlignItems = 'CENTER'`; the title group uses `layoutSizingHorizontal = 'FILL'` to push actions to the right.
     - Never place a section title without a subtitle. Never give buttons a fixed width in this context.
 
+26. **Container background = `containerBg` variable — always** — The `Container` frame inside the Layout Body MUST have its fill bound to the `containerBg` design variable (key: `a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02`). Never leave it as plain white (`#FFFFFF`) or any hardcoded color. Set it immediately after detaching the layout:
+    ```js
+    const containerBg = await figma.variables.importVariableByKeyAsync('a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02');
+    const container = det.findOne(n => n.name === 'Container');
+    setFill(container, containerBg);
+    ```
+
 25. **Table columns — always match cell variant to column type** — The DS Table component has 10 column types and 14 cell variants. Every column header MUST use the matching type and cell variant. Never leave all columns as generic "Avatar & Name" / "Description" / "Id" when the actual data differs.
 
     | Column header | _Table_Col Type | _Table_Cells_Main Variant |
