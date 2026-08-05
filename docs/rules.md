@@ -67,11 +67,15 @@
 
     Rule of thumb: if the heading stands alone as the only title in a card, use H5. If it labels a subsection or accompanies a larger title, use Body 1.
 
-26. **Container background = `containerBg` variable — always** — The `Container` frame inside the Layout Body MUST have its fill bound to the `containerBg` design variable (key: `a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02`). Never leave it as plain white (`#FFFFFF`) or any hardcoded color. Set it immediately after detaching the layout:
+26. **NEVER override the Container background after detaching** — The DS Layout component's `Container` frame already has the correct background variable bound internally. After `detachInstance()`, the Container preserves that binding. Do NOT call `setFill(container, ...)` — doing so replaces the bound variable with a raw color that may resolve to black or an incorrect shade. Only clear children and configure layout; leave `fills` untouched:
     ```js
-    const containerBg = await figma.variables.importVariableByKeyAsync('a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02');
     const container = det.findOne(n => n.name === 'Container');
-    setFill(container, containerBg);
+    container.layoutMode = 'VERTICAL';
+    container.primaryAxisSizingMode = 'AUTO';
+    container.layoutSizingHorizontal = 'FILL';
+    container.itemSpacing = 20;
+    for (const k of [...container.children]) k.remove();
+    // DO NOT setFill(container, ...) — background is already correctly bound
     ```
 
 25. **Table columns — always match cell variant to column type** — The DS Table component has 10 column types and 14 cell variants. Every column header MUST use the matching type and cell variant. Never leave all columns as generic "Avatar & Name" / "Description" / "Id" when the actual data differs.
