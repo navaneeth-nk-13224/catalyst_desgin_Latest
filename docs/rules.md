@@ -49,7 +49,34 @@
 
 20. **ALWAYS use the Table DS component — NEVER hand-build tables** — Import the ZCatalyst Table component (`f5c2c94ee6b8bddb779ff1d82125cc73b044fdfd` for Boxy, `ccaff166b021b69c24a3e554ea7e10e06c7609b9` for Stretch). Do NOT create tables from raw frames, text nodes, or dividers. The Table component is a pre-built DS component where each cell variant corresponds to its column header type (e.g. a "Status" column uses the Status cell variant, a "Name" column uses the Name cell variant, etc.). Respect this cell-variant-to-header-type relationship when customizing columns. **When using the Boxy variant, always wrap the Table instance in a card frame** (`bg: V.cardsBgPrimary, border: V.cardsBorderDefault, radius: 8`) — never place the table directly on the bare body background.
 
-21. **ALWAYS use the Pagination DS component — NEVER hand-build pagination** — Import the ZCatalyst Pagination component (`826469f58d1a4e68df306ac04da418b009ab9380`). Do NOT build custom pagination with raw frames, buttons, or text nodes. Place the Pagination instance directly below the Table component.
+21. **ALWAYS use the Pagination DS component — NEVER hand-build pagination** — Import the ZCatalyst Pagination component (`826469f58d1a4e68df306ac04da418b009ab9380`). Do NOT build custom pagination with raw frames, buttons, or text nodes. Place the Pagination instance directly below the Table component. **ONE pagination per table — never two.** The DS Table already has a built-in pagination row; do NOT add a second standalone Pagination instance on top of it.
+
+22. **ALWAYS use the DS Stepper component — NEVER hand-build steppers** — Use the Stepper component from the "2.0 Components" library (key: `2f4c11929da9e40ed54bb4a872209bc5ee81af29`). Never build a stepper from raw ellipses, lines, or text nodes. It is a 3-step component (success / active / disabled); step labels are TEXT nodes named `"Step 1"`. `_Stepper_Source` (ef09b7...) is an internal helper and is NOT importable.
+
+23. **ALL input forms go inside a DS Popup component — always** — ANY user input form (create, edit, configure, upload settings, wizard, etc.) MUST be placed inside a DS Popup/Modal component. Never place a form directly on the page body as a plain card. When a stepper flow is inside a popup, the popup width must be wide enough (800–900px) for the entire stepper to render in a single horizontal row — steppers must never truncate or wrap. Search the DS for the Popup component before building; do NOT hand-build modal overlays.
+
+24. **Section header layout pattern** — Every section card header row must follow this structure:
+    - **LEFT**: A VERTICAL frame (`gap: 4`) containing the title (H5) and a subtitle/description (Body 3) directly below it.
+    - **RIGHT**: Any buttons or search fields placed adjacent in the same HORIZONTAL row, each with `layoutSizingHorizontal = 'HUG'` (auto width — never fixed width on buttons here).
+    - The HORIZONTAL outer row uses `counterAxisAlignItems = 'CENTER'`; the title group uses `layoutSizingHorizontal = 'FILL'` to push actions to the right.
+    - Never place a section title without a subtitle. Never give buttons a fixed width in this context.
+
+25. **Table columns — always match cell variant to column type** — The DS Table component has 10 column types and 14 cell variants. Every column header MUST use the matching type and cell variant. Never leave all columns as generic "Avatar & Name" / "Description" / "Id" when the actual data differs.
+
+    | Column header | _Table_Col Type | _Table_Cells_Main Variant |
+    |---|---|---|
+    | Name / Bucket / User / File | `Avatar & Name` | `Name` |
+    | Email | `Avatar & Email` | `Email` |
+    | Date / Time / Created / Modified / Updated | `Date & Time` | `Date`, `Time`, or `Date and Time` |
+    | Description / Notes / Details | `Description` | `Description` |
+    | ID / Ref / Key | `Id` | `Id` |
+    | Status / Active / Health | `Name` or `Avatar & Name` | `Status` |
+    | Job / Execution / Run state | `Name` | `Execution Status` |
+    | Type / Icon indicator | `Icon Only` | `Icon with Text` |
+    | Inline action button | `Name` | `Button` |
+    | Actions (three-dot menu) | `Threedot` | `Threedot` |
+    | Select row | `Checkbox` | `Check Box` |
+    | Enable / Disable toggle | `Toggle Switch` | — |
 
 ---
 
