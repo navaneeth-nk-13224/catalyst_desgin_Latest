@@ -111,6 +111,14 @@
     - Need an icon → set `Show Icon = true` and swap via `Change Icon Left` property
     - Never import a separate icon component and place it next to a Link
 
+31. **Avatar component — only use next to a real user identity; never as a decorative icon** — The Avatar component (Letter Avatar: `8b8c956d97305223f2e21577dbd34d6d94aaad15`, No-Img Avatar: `6f8232bccf1064410043882f1fbf0ed10c4eb331`) represents a person. It MUST only appear directly next to a username, email address, or user-attributed content (e.g. "committed by", "created by", author rows in tables). Never use Avatar as:
+    - A feature icon or bullet point
+    - A category or section icon
+    - A generic decorative element
+    - A replacement for an actual icon component
+
+    When you need an icon to represent a feature, action, or category — import a dedicated icon component, not an Avatar.
+
 ---
 
 ## Importable Semantic Color Variables
