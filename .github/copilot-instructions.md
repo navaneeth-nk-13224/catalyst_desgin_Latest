@@ -179,7 +179,8 @@ async function addComp(parent, compKey, opts = {}) {
   const c = _compCache[compKey] || (_compCache[compKey] = await figma.importComponentByKeyAsync(compKey));
   const i = c.createInstance();
   parent.appendChild(i);
-  if (opts.fill) i.layoutSizingHorizontal = 'FILL';
+  // Always default to HUG — DS components (e.g. Dropdown) default to FIXED inside auto-layout
+  i.layoutSizingHorizontal = opts.fill ? 'FILL' : 'HUG';
   return i;
 }
 

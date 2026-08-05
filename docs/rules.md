@@ -62,6 +62,7 @@
     - **RIGHT**: Any buttons, dropdowns, or search fields — each with `layoutSizingHorizontal = 'HUG'` (never FILL or fixed width).
     - The HORIZONTAL outer row uses `counterAxisAlignItems = 'CENTER'`.
     - Never place controls alone end-to-end with no heading. Never give dropdowns or buttons a FILL width here.
+    - **Important:** The DS Dropdown component defaults to `layoutSizingHorizontal = 'FIXED'` when appended to an auto-layout frame. Always explicitly set `dropdownInstance.layoutSizingHorizontal = 'HUG'` after `parent.appendChild(dropdownInstance)`.
 
 27. **Card/section heading — use H5 or Body 1 (14px) depending on context** — Not every heading needs H5. Choose the right level:
     - **H5** (`be57224f7a8d40f6fb33855456c324c6fdc58adc`) — primary section titles, card titles that need visual weight (e.g. "Repositories", "Starter Templates")
