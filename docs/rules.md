@@ -105,7 +105,11 @@
     ```
     Detection: a frame with correct content that is visually collapsed or invisible has `layoutSizingVertical = 'FIXED'` and `height ≈ 10`. Fix: `frame.layoutSizingVertical = 'HUG'`.
 
-29. **Chip component — always use the "close disabled" variant; only use when necessary** — The ZCatalyst Chip component (key: `2cefc27769a90003228345b03c46e3788dfc35bd`) has variants with and without a close (×) button. Always import the variant where the close button is disabled/hidden unless the use case explicitly requires dismissal. Valid Chip use cases: tags, active filters, selected multi-value tokens, inline labels like commit hashes, version strings, environment names, or short status codes. **Never hand-build a Chip substitute** (raw padded frame + text) — if a small inline label badge is needed, use the Chip component.
+29. **Chip component — close icon MUST be disabled; only use when necessary** — The ZCatalyst Chip component (key: `2cefc27769a90003228345b03c46e3788dfc35bd`) has `Close=true` and `Icon Left=true` as defaults. After every `createInstance()`, always call:
+    ```js
+    chip.setProperties({ 'Close#429:1': false, 'Icon Left#429:0': false });
+    ```
+    Only re-enable `Close` when the chip is explicitly dismissable by the user. Only re-enable `Icon Left` when a specific icon is required. Valid Chip use cases: tags, active filters, selected multi-value tokens, inline labels like commit hashes, version strings, environment names, or short status codes. **Never hand-build a Chip substitute** (raw padded frame + text) — if a small inline label badge is needed, use the Chip component.
 
 30. **Link component — never place a separate icon next to a Link instance** — The Link component (key: `f577977a5f1c87652f614cd38e6364ff7efd53cc`) has a built-in `Icon Left` slot controlled by the `Show Icon` boolean property. Use that internal icon for any icon need — do NOT place a standalone icon component adjacent to a Link instance. Doing so creates duplicate icons. Rules:
     - Need no icon → set `Show Icon = false` via `setProperties({ 'Show Icon#738:17': false })`
