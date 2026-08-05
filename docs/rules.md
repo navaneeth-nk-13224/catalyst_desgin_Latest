@@ -2,6 +2,8 @@
 
 > **Read this file before creating any Figma page using the MCP workflow.**
 > These rules prevent known errors and ensure consistent, high-quality output.
+>
+> **Git rule:** Before every `git push`, all learnings stored in memory (session or persistent) MUST be written into this file as a numbered rule. No learning stays memory-only — if it is worth remembering, it belongs here.
 
 ---
 
