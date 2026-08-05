@@ -61,6 +61,12 @@
     - The HORIZONTAL outer row uses `counterAxisAlignItems = 'CENTER'`; the title group uses `layoutSizingHorizontal = 'FILL'` to push actions to the right.
     - Never place a section title without a subtitle. Never give buttons a fixed width in this context.
 
+27. **Card/section heading — use H5 or Body 1 (14px) depending on context** — Not every heading needs H5. Choose the right level:
+    - **H5** (`be57224f7a8d40f6fb33855456c324c6fdc58adc`) — primary section titles, card titles that need visual weight (e.g. "Repositories", "Starter Templates")
+    - **Body 1 / 14px** (`dd4a720e10df4ebca0fc96607ae81effb512009e`) — secondary or compact labels used as a heading when full H5 weight is too heavy (e.g. "Deployment Details" above a content block, a subsection label inside an already-titled card)
+
+    Rule of thumb: if the heading stands alone as the only title in a card, use H5. If it labels a subsection or accompanies a larger title, use Body 1.
+
 26. **Container background = `containerBg` variable — always** — The `Container` frame inside the Layout Body MUST have its fill bound to the `containerBg` design variable (key: `a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02`). Never leave it as plain white (`#FFFFFF`) or any hardcoded color. Set it immediately after detaching the layout:
     ```js
     const containerBg = await figma.variables.importVariableByKeyAsync('a9b4ed83b5ad5b5fe00bc4e56a141e92ad8dae02');
