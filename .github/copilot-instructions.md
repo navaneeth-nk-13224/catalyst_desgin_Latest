@@ -39,7 +39,13 @@ await figma.setCurrentPageAsync(pg);
 // 3. CRITICAL: detach top-level to allow appendChild (inner components stay as INSTANCE)
 const det = layoutInst.detachInstance();
 
-// 4. Configure Sub Header (keep visible — set title + toggle props)
+// 4. Switch Tokens collection to Light mode — DS component defaults to Dark
+const _tokenColl = figma.variables.getVariableCollectionById(
+  'VariableCollectionId:7d5c86a1d877b0b8a9b1a6f61d95bd81dfd3699b/12772:3506'
+);
+det.setExplicitVariableModeForCollection(_tokenColl, '12588:0');
+
+// 5. Configure Sub Header (keep visible — set title + toggle props)
 const subH = det.findOne(n => n.name === 'Sub Header' && n.type === 'INSTANCE');
 await setText(subH, 'Feature Names', 'PAGE_NAME');
 // Toggle boolean props via figma_set_instance_properties or:

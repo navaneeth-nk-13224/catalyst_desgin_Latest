@@ -67,16 +67,15 @@
 
     Rule of thumb: if the heading stands alone as the only title in a card, use H5. If it labels a subsection or accompanies a larger title, use Body 1.
 
-26. **NEVER override the Container background after detaching** — The DS Layout component's `Container` frame already has the correct background variable bound internally. After `detachInstance()`, the Container preserves that binding. Do NOT call `setFill(container, ...)` — doing so replaces the bound variable with a raw color that may resolve to black or an incorrect shade. Only clear children and configure layout; leave `fills` untouched:
-    ```js
-    const container = det.findOne(n => n.name === 'Container');
-    container.layoutMode = 'VERTICAL';
-    container.primaryAxisSizingMode = 'AUTO';
-    container.layoutSizingHorizontal = 'FILL';
-    container.itemSpacing = 20;
-    for (const k of [...container.children]) k.remove();
-    // DO NOT setFill(container, ...) — background is already correctly bound
-    ```
+26. **Container background — two rules, no exceptions:**
+    1. **ALWAYS set Tokens collection to Light mode immediately after `detachInstance()`** — the DS Layout component is internally set to Dark mode, so every detached layout starts dark. Fix it before touching anything else:
+        ```js
+        const _tc = figma.variables.getVariableCollectionById(
+          'VariableCollectionId:7d5c86a1d877b0b8a9b1a6f61d95bd81dfd3699b/12772:3506'
+        );
+        det.setExplicitVariableModeForCollection(_tc, '12588:0'); // Light
+        ```
+    2. **NEVER modify the Container's `fills` property** — not to set it, not to clear it. Leave the Container's background exactly as the DS component provides it. Any `setFill(container, ...)` or `container.fills = []` call is forbidden.
 
 25. **Table columns — always match cell variant to column type** — The DS Table component has 10 column types and 14 cell variants. Every column header MUST use the matching type and cell variant. Never leave all columns as generic "Avatar & Name" / "Description" / "Id" when the actual data differs.
 
