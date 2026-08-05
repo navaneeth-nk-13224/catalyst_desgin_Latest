@@ -106,6 +106,11 @@
 
 29. **Chip component — always use the "close disabled" variant; only use when necessary** — The ZCatalyst Chip component (key: `2cefc27769a90003228345b03c46e3788dfc35bd`) has variants with and without a close (×) button. Always import the variant where the close button is disabled/hidden unless the use case explicitly requires dismissal. Do not scatter Chips across the UI as decoration — use them only for tags, active filters, or selected multi-value tokens where the label adds real information value.
 
+30. **Link component — never place a separate icon next to a Link instance** — The Link component (key: `f577977a5f1c87652f614cd38e6364ff7efd53cc`) has a built-in `Icon Left` slot controlled by the `Show Icon` boolean property. Use that internal icon for any icon need — do NOT place a standalone icon component adjacent to a Link instance. Doing so creates duplicate icons. Rules:
+    - Need no icon → set `Show Icon = false` via `setProperties({ 'Show Icon#738:17': false })`
+    - Need an icon → set `Show Icon = true` and swap via `Change Icon Left` property
+    - Never import a separate icon component and place it next to a Link
+
 ---
 
 ## Importable Semantic Color Variables
