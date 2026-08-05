@@ -170,7 +170,7 @@ async function mkText(parent, text, styleKey, colorVar, opts = {}) {
   setFill(t, colorVar);
   if (opts.width) { t.resize(opts.width, t.height); t.textAutoResize = 'HEIGHT'; }
   parent.appendChild(t);
-  if (opts.fill) t.layoutSizingHorizontal = 'FILL';
+  if (opts.fill) t.layoutSizingHorizontal = 'FILL'; // FILL must come after appendChild (Rule 5)
   return t;
 }
 
