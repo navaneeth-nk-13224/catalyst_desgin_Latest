@@ -366,6 +366,8 @@ figma_set_instance_properties({ nodeId: 'X:Y', properties: { 'Icon Left': true, 
 
 Property names auto-resolve `#nodeId` suffixes — just use the base name.
 
+**IMPORTANT — `setProperties()` in Plugin API requires full names with `#id` suffix.** Before calling `instance.setProperties({...})`, read `componentPropertyDefinitions` from the parent component set to get the exact keys (e.g. `'Show Tab 5#456:0'` not `'Show Tab 5'`). The auto-resolve only works via the MCP `figma_set_instance_properties` tool, not in `figma_execute` code.
+
 ---
 
 ## Layout Structure (inside Layout component)
@@ -426,6 +428,8 @@ Then in the next call, skip built sections and continue from where it stopped.
 10. **DS file is READ-ONLY** — Never add, build, modify, or change anything in the Design System file. It is a published library — only import components and variables from it.
 11. **Always use DS components over hand-built elements** — If a component exists in the DS (Badges, Table, Tabs, etc.), import it. Never recreate UI elements with raw frames, ellipses, or text — even to save execution time during timeouts. Split work across multiple calls instead.
 12. **NEVER hand-build tables** — Always import the ZCatalyst Table DS component (Boxy: `f5c2c94ee6b8bddb779ff1d82125cc73b044fdfd`, Stretch: `ccaff166b021b69c24a3e554ea7e10e06c7609b9`). The Table is designed so that **each cell variant matches its column header type** (a "Status" header → Status cell variant; a "Name" header → Name cell variant, etc.). Never build tables from raw frames, dividers, or text nodes. **For the Boxy variant, always wrap the Table in a card** (`bg: V.cardsBgPrimary, border: V.cardsBorderDefault, radius: 8`) — do not place it directly on the body background.
+14. **ALWAYS use DS icon components — never hand-build icons** — When an icon is needed in any toolbar, action row, card, or empty state, search the DS using `figma_search_components` with the semantic name (e.g. 'branch', 'send', 'close', 'check'). If the exact icon isn't found, use the closest contextual match (e.g. 'Arrow Right' for send, 'Code' for AI/robot, 'GitHub' for branch/git). Never build icons from raw shapes. Search before assuming an icon doesn't exist.
+
 13. **NEVER hand-build pagination** — Always import the ZCatalyst Pagination DS component (`826469f58d1a4e68df306ac04da418b009ab9380`) and place it directly below the Table instance. Never create custom pagination from buttons, text, or raw frames.
 
 ---

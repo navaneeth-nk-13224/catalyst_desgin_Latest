@@ -165,6 +165,10 @@
 
 32. **Alignment verification after every page build** — After finishing each page, scan for text nodes that are rendering vertically or falling out of auto-layout flow. Common cause: a FILL-width text node placed inside a HORIZONTAL frame whose `counterAxisAlignItems` is not set. Always set `counterAxisAlignItems = 'CENTER'` (or `align: 'CENTER'` in `mkF` opts) on every horizontal frame that contains text.
 
+34. **Always use DS icon components for icons — never hand-build** — When an icon is needed (in toolbars, action rows, empty states, cards, etc.), always import a matching icon from the ZCatalyst DS icon library using `figma_search_components` with the semantic name (e.g. "branch", "send", "robot", "close", "search"). If the exact icon is not found, use the closest contextually appropriate match (e.g. "arrow right" instead of "send", "bot" or "code" instead of "robot"). Never build an icon from raw shapes, rectangles, or text characters. Always search before assuming an icon doesn't exist.
+
+35. **`instance.setProperties()` requires full property names with `#id` suffix** — When calling `setProperties({...})` in Plugin API (`figma_execute` code), property keys must include the `#nodeId` suffix exactly as returned by `componentPropertyDefinitions` (e.g. `'Show Tab 5#456:0'`, not `'Show Tab 5'`). The auto-resolve shorthand only works via the MCP `figma_set_instance_properties` tool. Always read `compSet.componentPropertyDefinitions` to get the exact key names before calling `setProperties()` on an instance.
+
 33. **Token efficiency — workflow rules for every Figma MCP session:**
     - **No auto-screenshots** — only call `figma_capture_screenshot` when explicitly asked or when a build fails and visual confirmation is needed.
     - **Short build confirmations** — after a successful `figma_execute`, return only a one-line result (e.g. `Done — 3 sections, x=0`). No summary tables.
