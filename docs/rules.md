@@ -160,3 +160,13 @@
 | `docs/zcatalyst-design-system.md` | 59 component sets + Layout component with keys, variants, props, text node names |
 | `docs/zcatalyst-styles.md` | 26 text styles + 500+ color variables with keys |
 | `.github/copilot-instructions.md` | Full workflow auto-loaded by Copilot (clone, vars, helpers, patterns) |
+
+---
+
+32. **Alignment verification after every page build** — After finishing each page, scan for text nodes that are rendering vertically or falling out of auto-layout flow. Common cause: a FILL-width text node placed inside a HORIZONTAL frame whose `counterAxisAlignItems` is not set. Always set `counterAxisAlignItems = 'CENTER'` (or `align: 'CENTER'` in `mkF` opts) on every horizontal frame that contains text.
+
+33. **Token efficiency — workflow rules for every Figma MCP session:**
+    - **No auto-screenshots** — only call `figma_capture_screenshot` when explicitly asked or when a build fails and visual confirmation is needed.
+    - **Short build confirmations** — after a successful `figma_execute`, return only a one-line result (e.g. `Done — 3 sections, x=0`). No summary tables.
+    - **No redundant inspection calls** — all Sub Header props, popup text node names, table structure, and component keys are in `docs/rules.md` and `docs/zcatalyst-design-system.md`. Read from docs, not from Figma.
+    - **Trim variable imports** — only import the `VK` entries actually used on that specific screen. Do not paste the full 17-entry VK block when only 4 variables are needed.
