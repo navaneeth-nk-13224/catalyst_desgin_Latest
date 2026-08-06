@@ -310,3 +310,21 @@
     | Secondary action in a toolbar | Outline Button |
 
     Import with: `await addComp(parent, '30e046ce604fd8e018149f8dcb3263d25d88b005')`
+
+50. **NEVER hand-build tabs — always use the DS Primary Tabs component** — Tab items must NEVER be built from raw frames and text nodes (e.g. `createFrame() + createText()`). This applies to ALL tab usage, whether page-level navigation tabs or content-area tabs inside a card. Always import and use the DS Primary Tabs component:
+    - Primary Tabs component key: `043ae53648d3f06258b07ce5b744c6585ce3ce22`
+    - Tab text nodes inside are named `Tab Text 1` through `Tab Text 5`
+    - Boolean props `Show Tab 3`, `Show Tab 4`, `Show Tab 5` control visibility of tabs 3–5
+
+    ```js
+    const tabs = await addComp(parent, '043ae53648d3f06258b07ce5b744c6585ce3ce22', { fill: true });
+    // Set tab labels — find all text nodes named 'Tab Text 1' by index
+    const tabTexts = tabs.findAll(n => n.type === 'TEXT' && n.name === 'Tab Text 1');
+    const labels = ['README', 'MIT License'];
+    for (let i = 0; i < labels.length; i++) {
+      await figma.loadFontAsync(tabTexts[i].fontName);
+      tabTexts[i].characters = labels[i];
+    }
+    ```
+
+    A hand-built tab (Frame + Text with padding and border-bottom) looks visually similar but is not interactive, not DS-compliant, and cannot be toggled via component properties. The only acceptable raw-frame tab is inside a fully custom component that the DS does not provide — which does not exist for standard tab bars.
