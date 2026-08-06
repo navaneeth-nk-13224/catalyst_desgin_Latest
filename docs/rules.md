@@ -184,6 +184,21 @@
     **Boolean prop**: `Show Search box#447:0` — set to `true` to enable a search field at the top of the menu.
     **Sizing**: All Default variants are 379–380px wide. Never hand-set a smaller width — keep the component's natural width.
 
+38. **Dropdown Menu must always be placed as an absolute overlay — never in auto-layout flow** — The Dropdown Menu component simulates an open dropdown panel that floats over other content. After creating the instance, always:
+    1. Append it to the **same parent frame** as the dropdown trigger (e.g. the card or container), not to the wrapper holding the trigger.
+    2. Set `menuInst.layoutPositioning = 'ABSOLUTE'` to take it out of auto-layout flow.
+    3. Set `menuInst.x` and `menuInst.y` relative to that parent so the menu appears flush below the dropdown trigger:
+       ```js
+       const triggerBox = trigger.absoluteBoundingBox;
+       const parentBox = parentFrame.absoluteBoundingBox;
+       menuInst.layoutPositioning = 'ABSOLUTE';
+       menuInst.x = Math.round(triggerBox.x - parentBox.x);
+       menuInst.y = Math.round(triggerBox.y - parentBox.y + trigger.height);
+       menuInst.layoutSizingHorizontal = 'FIXED';
+       menuInst.resize(Math.round(trigger.width), menuInst.height);
+       ```
+    Never stack the menu inside the same auto-layout wrapper as the trigger — it must overlap other content as a real overlay.
+
 36. **Always use the LinkBox DS component for any copyable URL or link value** — Whenever a URL, endpoint, connection string, API key, webhook URL, or any value the user should be able to copy is shown on screen, use the ZCatalyst LinkBox component (Set Key: `723d10821d635cb25626fc7e8545b389dbe97bdb`). Never render a copyable link as a raw text node, a plain frame, or a hand-built input with a copy button. Choose the variant by label position:
     - `Top/Default/Default` → label above the URL box: key=`9fbf4fca3a034d19feaee4cde4ab05b3185c2284`
     - `Left/Default/Default` → label to the left: key=`85439b9d41fb8ab6b126543e2a8ba51ba9bce1ff`
