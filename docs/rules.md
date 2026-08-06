@@ -212,3 +212,12 @@
     - **Short build confirmations** — after a successful `figma_execute`, return only a one-line result (e.g. `Done — 3 sections, x=0`). No summary tables.
     - **No redundant inspection calls** — all Sub Header props, popup text node names, table structure, and component keys are in `docs/rules.md` and `docs/zcatalyst-design-system.md`. Read from docs, not from Figma.
     - **Trim variable imports** — only import the `VK` entries actually used on that specific screen. Do not paste the full 17-entry VK block when only 4 variables are needed.
+
+39. **Adjacent containers in a horizontal row must always be equal height** — When two or more cards, sections, or panels are placed side by side in a `HORIZONTAL` auto-layout frame, always set `layoutSizingVertical = 'FILL'` on every child. This stretches all siblings to match the tallest one, ensuring visual balance. Never leave one sibling shorter than its neighbor:
+    ```js
+    // After building all cards in a horizontal row:
+    for (const child of horizontalRow.children) {
+      child.layoutSizingVertical = 'FILL';
+    }
+    ```
+    The parent row itself should use `counterAxisSizingMode = 'AUTO'` (HUG) so it naturally sizes to the tallest child.
