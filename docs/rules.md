@@ -229,3 +229,18 @@
     - Warning/alert rows use an inline warning icon + colored text (not a badge).
 
 41. **Tab bar always at the top of content, before the grid** — When a page has navigation tabs (Overview, Queries, Users, etc.), always place the Primary Tabs component as the FIRST element inside the Container, directly below the Sub Header, before any content cards. Tabs are page-level navigation — never place them between content sections or use them as section dividers. The content grid (cards) sits below the tab bar. The active tab's content is represented by the cards below.
+
+42. **`figma.createFrame()` defaults to 100×100px — always resize or set sizing mode immediately** — A freshly created frame has `width=100, height=100` and `primaryAxisSizingMode='FIXED'`. Setting `layoutMode='VERTICAL'` does NOT reset the height. If you use a frame as a spacer or flex-grow element inside auto-layout, you MUST also set `primaryAxisSizingMode='AUTO'` (to shrink to 0 content) or call `frame.resize(0, 1)`. Leaving it at the default 100px will silently inflate the parent container's height:
+    ```js
+    // WRONG — leaves frame at 100px tall:
+    const spacer = figma.createFrame(); spacer.layoutMode = 'VERTICAL'; spacer.fills = [];
+    parent.appendChild(spacer); spacer.layoutSizingHorizontal = 'FILL';
+
+    // CORRECT — use primaryAxisSizingMode AUTO so it shrinks to 0:
+    const spacer = figma.createFrame(); spacer.layoutMode = 'VERTICAL';
+    spacer.primaryAxisSizingMode = 'AUTO'; spacer.counterAxisSizingMode = 'AUTO';
+    spacer.fills = []; parent.appendChild(spacer); spacer.layoutSizingHorizontal = 'FILL';
+    ```
+    **Preferred alternative**: instead of a spacer frame, set `layoutSizingHorizontal = 'FILL'` on an adjacent text or content node — that naturally pushes remaining items to the right without the extra frame.
+
+43. **Rule 39 (FILL height) applies only to sibling cards — not page-level columns** — Set `layoutSizingVertical = 'FILL'` on children only when the siblings in a horizontal row are CARDS that should visually match height (e.g., Summary card + Top Committers card in a dashboard row). Do NOT set FILL on page-level columns (left column vs right column of a full-page grid): those columns hold different amounts of content and should HUG their own height. Forcing FILL on unequal page columns leaves a large empty gap at the bottom of the shorter column.
