@@ -337,3 +337,12 @@
     const selectedNode = selection[0];
     ```
     Never call `setCurrentPageAsync` before reading `figma.currentPage.selection` — page switching clears the plugin's selection context, making `selection` return empty. If the task involves the user's selection (e.g. "fix this", "check this", "I've selected it"), resolve the selection first, record its `id` and `parent.id`, THEN switch pages if needed. Searching through all pages by text/content is a last resort — `figma.currentPage.selection` is always the first approach.
+
+52. **Tab bar wrapper always has `paddingBottom = 0` — the tab bottom edge must sit flush on the container border** — When the DS Primary Tabs component is placed inside a card, frame, or any container, the wrapper frame's bottom padding MUST be 0. This makes the active tab's bottom border visually connect to the card/container border below it — the standard tab UI pattern. Top and side padding follow the card header band standard (`padTop: 8, padX: 16`), but bottom is always 0:
+    ```js
+    tabBarWrapper.paddingTop = 8;
+    tabBarWrapper.paddingLeft = 16;
+    tabBarWrapper.paddingRight = 16;
+    tabBarWrapper.paddingBottom = 0; // flush — tab underline merges with container edge
+    ```
+    Adding bottom padding lifts the tabs away from the container border, breaking the visual connection and making the active tab look detached from its content area.
