@@ -243,4 +243,14 @@
     ```
     **Preferred alternative**: instead of a spacer frame, set `layoutSizingHorizontal = 'FILL'` on an adjacent text or content node — that naturally pushes remaining items to the right without the extra frame.
 
+44. **Never use spacer frames or empty frames — use auto-layout properties instead** — Spacer frames (`figma.createFrame()` with no content) are fragile and cause silent height inflation (see Rule 42). Every alignment goal has a proper auto-layout solution:
+    | Goal | Wrong | Correct |
+    |---|---|---|
+    | Push item to far right | empty FILL spacer frame | `layoutSizingHorizontal = 'FILL'` on the preceding text/content node |
+    | Center items vertically | empty padding frames | `counterAxisAlignItems = 'CENTER'` on the parent |
+    | Space items evenly | multiple spacer frames | `primaryAxisAlignItems = 'SPACE_BETWEEN'` on the parent |
+    | Push item to bottom | empty FILL spacer frame | `primaryAxisAlignItems = 'SPACE_BETWEEN'` or `primaryAxisSizingMode = 'FIXED'` on parent with last child having no extra sizing |
+    | Equal spacing between items | manual spacers | `itemSpacing` (gap) on the parent frame |
+    If you find yourself creating a frame with no children and no visual fill, stop — there is always an auto-layout property that achieves the same result without a dummy node.
+
 43. **Rule 39 (FILL height) applies only to sibling cards — not page-level columns** — Set `layoutSizingVertical = 'FILL'` on children only when the siblings in a horizontal row are CARDS that should visually match height (e.g., Summary card + Top Committers card in a dashboard row). Do NOT set FILL on page-level columns (left column vs right column of a full-page grid): those columns hold different amounts of content and should HUG their own height. Forcing FILL on unequal page columns leaves a large empty gap at the bottom of the shorter column.
