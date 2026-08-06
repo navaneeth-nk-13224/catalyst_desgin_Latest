@@ -298,3 +298,15 @@
     | Dedicated form card | Visible |
 
     For TextBox, disable the label by setting the `Label` boolean property to `false`. For Dropdown, the label slot is the `Drop down` text node — leave it empty or check the DS component property to hide it. Always set a meaningful placeholder (`Enter Label Text` / `Select List` text node) regardless of label visibility.
+
+49. **Inline action links and clickable text elements always use the Small Link component** — Any button-like or clickable text element that is not a primary action (e.g. "View all", "See details", "Edit", "Learn more", "Show logs", inline navigation anchors in cards or table rows) must use the Small Link component, not a Button. Full-size buttons are reserved for primary and secondary actions in toolbars, popups, and form footers. The default component key for Small Link is `30e046ce604fd8e018149f8dcb3263d25d88b005` (`Default/Small/Default`). For primary-colored small links use `Default/Small/Primary` variant instead.
+
+    | Scenario | Correct component |
+    |---|---|
+    | "View all" in a card header/footer | Small Link |
+    | "Edit" / "Delete" inline in a row | Small Link |
+    | "Learn more" inside a description | Small Link |
+    | Primary CTA in a form/modal | Fill Button |
+    | Secondary action in a toolbar | Outline Button |
+
+    Import with: `await addComp(parent, '30e046ce604fd8e018149f8dcb3263d25d88b005')`
