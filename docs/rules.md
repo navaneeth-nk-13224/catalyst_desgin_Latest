@@ -213,6 +213,20 @@
     - **No redundant inspection calls** — all Sub Header props, popup text node names, table structure, and component keys are in `docs/rules.md` and `docs/zcatalyst-design-system.md`. Read from docs, not from Figma.
     - **Trim variable imports** — only import the `VK` entries actually used on that specific screen. Do not paste the full 17-entry VK block when only 4 variables are needed.
 
+47. **Classify every DS component as "flow" or "overlay" before placing it — overlays must always use `layoutPositioning = 'ABSOLUTE'`** — Two mutually exclusive component categories exist:
+
+    - **Flow components** — participate in auto-layout. Examples: Button, TextBox, Dropdown (trigger), Badge, Chip, Avatar, Divider, Table, Tabs, Link, TextArea, Stepper.
+    - **Overlay components** — simulate floating UI. Examples: Dropdown Menu (open panel), Tooltip, Modal, Popover, Context Menu, Date Picker (floating), Notification Banner.
+
+    Overlay components placed as regular auto-layout children will push other content down, inflate row/card heights, and produce broken layouts. Before `appendChild`, identify the category. If it floats in real UI, it must float in Figma:
+    ```js
+    inst.layoutPositioning = 'ABSOLUTE';
+    // then position relative to parent:
+    inst.x = triggerBox.x - parentBox.x;
+    inst.y = triggerBox.y - parentBox.y + trigger.height;
+    ```
+    Rule 38 (Dropdown Menu) is a specific instance of this principle. Any new DS component not yet listed must be classified before use — check the DS component name: if it ends in "Menu", "Panel", "Overlay", "Tooltip", or "Modal", it is an overlay.
+
 39. **Adjacent containers in a horizontal row must always be equal height** — When two or more cards, sections, or panels are placed side by side in a `HORIZONTAL` auto-layout frame, always set `layoutSizingVertical = 'FILL'` on every child. This stretches all siblings to match the tallest one, ensuring visual balance. Never leave one sibling shorter than its neighbor:
     ```js
     // After building all cards in a horizontal row:
