@@ -286,3 +286,15 @@
     If you find yourself creating a frame with no children and no visual fill, stop — there is always an auto-layout property that achieves the same result without a dummy node.
 
 43. **Rule 39 (FILL height) applies only to sibling cards — not page-level columns** — Set `layoutSizingVertical = 'FILL'` on children only when the siblings in a horizontal row are CARDS that should visually match height (e.g., Summary card + Top Committers card in a dashboard row). Do NOT set FILL on page-level columns (left column vs right column of a full-page grid): those columns hold different amounts of content and should HUG their own height. Forcing FILL on unequal page columns leaves a large empty gap at the bottom of the shorter column.
+
+48. **TextBox and Dropdown always without labels — labels only inside popups and forms** — By default, every TextBox and Dropdown instance on a page (filter bars, inline search, toolbar inputs, table column headers, settings rows) must hide its label. Labels add vertical height and visual noise in dense UI. Only show labels when the input lives inside a **modal/popup form** or a **dedicated form section** (e.g. a "Create new…" dialog, an "Edit configuration" panel):
+
+    | Context | Label visibility |
+    |---|---|
+    | Filter bar / toolbar | Hidden — use placeholder text only |
+    | Table column filter | Hidden |
+    | Inline settings row | Hidden |
+    | Modal / popup form | Visible |
+    | Dedicated form card | Visible |
+
+    For TextBox, disable the label by setting the `Label` boolean property to `false`. For Dropdown, the label slot is the `Drop down` text node — leave it empty or check the DS component property to hide it. Always set a meaningful placeholder (`Enter Label Text` / `Select List` text node) regardless of label visibility.
