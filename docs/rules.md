@@ -169,6 +169,14 @@
 
 35. **`instance.setProperties()` requires full property names with `#id` suffix** — When calling `setProperties({...})` in Plugin API (`figma_execute` code), property keys must include the `#nodeId` suffix exactly as returned by `componentPropertyDefinitions` (e.g. `'Show Tab 5#456:0'`, not `'Show Tab 5'`). The auto-resolve shorthand only works via the MCP `figma_set_instance_properties` tool. Always read `compSet.componentPropertyDefinitions` to get the exact key names before calling `setProperties()` on an instance.
 
+36. **Always use the LinkBox DS component for any copyable URL or link value** — Whenever a URL, endpoint, connection string, API key, webhook URL, or any value the user should be able to copy is shown on screen, use the ZCatalyst LinkBox component (Set Key: `723d10821d635cb25626fc7e8545b389dbe97bdb`). Never render a copyable link as a raw text node, a plain frame, or a hand-built input with a copy button. Choose the variant by label position:
+    - `Top/Default/Default` → label above the URL box: key=`9fbf4fca3a034d19feaee4cde4ab05b3185c2284`
+    - `Left/Default/Default` → label to the left: key=`85439b9d41fb8ab6b126543e2a8ba51ba9bce1ff`
+    - `No Label/Default/Default` → no label, URL only: key=`b3d6ab6ddfa3c132c089be3974f76faec62cd64b`
+    - `Label Inside/Default/Default` → label inside the box: key=`fad0f8817f567cbccb46ee5a51572fa7daceafc2`
+    - Small variants append `/Small` (e.g. `Top/Default/Small`: key=`4cade09cb16cea00f812f0b9c59f44cd2aa35777`).
+    Text nodes: `URL` (label), long URL value text node. Boolean props: `Label`, `Info Icon`.
+
 33. **Token efficiency — workflow rules for every Figma MCP session:**
     - **No auto-screenshots** — only call `figma_capture_screenshot` when explicitly asked or when a build fails and visual confirmation is needed.
     - **Short build confirmations** — after a successful `figma_execute`, return only a one-line result (e.g. `Done — 3 sections, x=0`). No summary tables.

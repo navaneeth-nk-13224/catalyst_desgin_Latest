@@ -232,6 +232,8 @@ Full list: `docs/zcatalyst-styles.md`
 | **Table (Boxy)** | `f5c2c94ee6b8bddb779ff1d82125cc73b044fdfd` |
 | **Table (Stretch)** | `ccaff166b021b69c24a3e554ea7e10e06c7609b9` |
 | **Pagination** | `826469f58d1a4e68df306ac04da418b009ab9380` |
+| **LinkBox (Top label)** | `9fbf4fca3a034d19feaee4cde4ab05b3185c2284` |
+| **LinkBox (No label)** | `b3d6ab6ddfa3c132c089be3974f76faec62cd64b` |
 
 Full list: `docs/zcatalyst-design-system.md`
 
