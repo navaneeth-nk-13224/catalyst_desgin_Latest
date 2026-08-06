@@ -221,3 +221,11 @@
     }
     ```
     The parent row itself should use `counterAxisSizingMode = 'AUTO'` (HUG) so it naturally sizes to the tallest child.
+
+40. **Always beautify screenshots — never copy 1:1** — When a screenshot is provided as design reference, treat it as intent, not a spec. Always apply layout principles to improve it:
+    - Use a **2-column grid** for detail/instance pages: left column (~55–60%, FILL) for primary data (overview, connection info), right column (~40–45%, FILL) for configuration and activity/log cards. Each section is its own card — never one merged container.
+    - Apply the **card header band pattern**: every card gets a `bg=bodyBg` header strip with the section title + any header actions (links, dropdowns, badges) in the same row.
+    - Cluster nodes, activity items, and status rows use **mini-card rows** (`bg=bodyBg, border, radius=6`) not flat text lines.
+    - Warning/alert rows use an inline warning icon + colored text (not a badge).
+
+41. **Tab bar always at the top of content, before the grid** — When a page has navigation tabs (Overview, Queries, Users, etc.), always place the Primary Tabs component as the FIRST element inside the Container, directly below the Sub Header, before any content cards. Tabs are page-level navigation — never place them between content sections or use them as section dividers. The content grid (cards) sits below the tab bar. The active tab's content is represented by the cards below.
