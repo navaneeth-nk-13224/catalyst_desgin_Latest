@@ -328,3 +328,12 @@
     ```
 
     A hand-built tab (Frame + Text with padding and border-bottom) looks visually similar but is not interactive, not DS-compliant, and cannot be toggled via component properties. The only acceptable raw-frame tab is inside a fully custom component that the DS does not provide — which does not exist for standard tab bars.
+
+51. **Always read the current page and current selection at the start of every `figma_execute` call** — Before doing ANY page switching, searching, or building, the very first lines of every `figma_execute` call must capture the user's current page and selection:
+    ```js
+    // ALWAYS first — before any setCurrentPageAsync or findAll
+    const currentPage = figma.currentPage;
+    const selection = figma.currentPage.selection;
+    const selectedNode = selection[0];
+    ```
+    Never call `setCurrentPageAsync` before reading `figma.currentPage.selection` — page switching clears the plugin's selection context, making `selection` return empty. If the task involves the user's selection (e.g. "fix this", "check this", "I've selected it"), resolve the selection first, record its `id` and `parent.id`, THEN switch pages if needed. Searching through all pages by text/content is a last resort — `figma.currentPage.selection` is always the first approach.
