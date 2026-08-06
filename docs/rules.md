@@ -230,6 +230,8 @@
 
 41. **Tab bar always at the top of content, before the grid** — When a page has navigation tabs (Overview, Queries, Users, etc.), always place the Primary Tabs component as the FIRST element inside the Container, directly below the Sub Header, before any content cards. Tabs are page-level navigation — never place them between content sections or use them as section dividers. The content grid (cards) sits below the tab bar. The active tab's content is represented by the cards below.
 
+45. **Always use ONE Primary Tabs instance — never append a Secondary Tabs instance to handle overflow** — The Primary Tabs component supports up to 5 tabs (Tab 1 always visible; Tab 3/4/5 toggled via boolean props). When a page has more than 5 tabs, the temptation is to add a Secondary Tabs instance next to the Primary one for the extra tabs. This is WRONG — it produces a mismatched, orphaned component that looks broken. The correct approach: use ONE Primary Tabs instance showing the 5 most important tabs. Drop or deprioritise any beyond 5. Never mix Primary + Secondary Tabs components in the same tab bar row.
+
 42. **`figma.createFrame()` defaults to 100×100px — always resize or set sizing mode immediately** — A freshly created frame has `width=100, height=100` and `primaryAxisSizingMode='FIXED'`. Setting `layoutMode='VERTICAL'` does NOT reset the height. If you use a frame as a spacer or flex-grow element inside auto-layout, you MUST also set `primaryAxisSizingMode='AUTO'` (to shrink to 0 content) or call `frame.resize(0, 1)`. Leaving it at the default 100px will silently inflate the parent container's height:
     ```js
     // WRONG — leaves frame at 100px tall:
