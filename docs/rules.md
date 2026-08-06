@@ -232,6 +232,22 @@
 
 45. **Always use ONE Primary Tabs instance — never append a Secondary Tabs instance to handle overflow** — The Primary Tabs component supports up to 5 tabs (Tab 1 always visible; Tab 3/4/5 toggled via boolean props). When a page has more than 5 tabs, the temptation is to add a Secondary Tabs instance next to the Primary one for the extra tabs. This is WRONG — it produces a mismatched, orphaned component that looks broken. The correct approach: use ONE Primary Tabs instance showing the 5 most important tabs. Drop or deprioritise any beyond 5. Never mix Primary + Secondary Tabs components in the same tab bar row.
 
+46. **Page-level navigation tabs always go inside the Sub Header — never as a standalone Tabs component in the Container** — When tabs switch the entire content of the page (e.g. Overview / Queries / Users / Settings), enable the Sub Header's built-in `Primary Tab` prop. Never add a standalone Primary Tabs component as the first element of the Container for this purpose. Reserve standalone Tabs components strictly for in-content tab switching within a card (e.g. README / MIT license inside a content card).
+
+    **How to enable Sub Header primary tabs:**
+    ```js
+    // Use componentProperties (not componentPropertyDefinitions — that returns empty for Sub Header)
+    subH.setProperties({ 'Primary Tab#1234:9': true });
+    // All 5 tab text nodes are named 'Tab Text 1' — set by index
+    const tabTexts = subH.findAll(n => n.type === 'TEXT' && n.name === 'Tab Text 1');
+    const labels = ['Overview', 'Queries', 'Users', 'Settings', 'Logs'];
+    for (let i = 0; i < Math.min(tabTexts.length, labels.length); i++) {
+      await figma.loadFontAsync(tabTexts[i].fontName);
+      tabTexts[i].characters = labels[i];
+    }
+    ```
+    The Sub Header `Primary Tab` property key is stable across all pages: `Primary Tab#1234:9`. To discover any Sub Header prop key, read `subH.componentProperties` (not `getMainComponentAsync().parent.componentPropertyDefinitions`).
+
 42. **`figma.createFrame()` defaults to 100×100px — always resize or set sizing mode immediately** — A freshly created frame has `width=100, height=100` and `primaryAxisSizingMode='FIXED'`. Setting `layoutMode='VERTICAL'` does NOT reset the height. If you use a frame as a spacer or flex-grow element inside auto-layout, you MUST also set `primaryAxisSizingMode='AUTO'` (to shrink to 0 content) or call `frame.resize(0, 1)`. Leaving it at the default 100px will silently inflate the parent container's height:
     ```js
     // WRONG — leaves frame at 100px tall:
