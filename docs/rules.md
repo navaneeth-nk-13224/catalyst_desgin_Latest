@@ -169,6 +169,21 @@
 
 35. **`instance.setProperties()` requires full property names with `#id` suffix** — When calling `setProperties({...})` in Plugin API (`figma_execute` code), property keys must include the `#nodeId` suffix exactly as returned by `componentPropertyDefinitions` (e.g. `'Show Tab 5#456:0'`, not `'Show Tab 5'`). The auto-resolve shorthand only works via the MCP `figma_set_instance_properties` tool. Always read `compSet.componentPropertyDefinitions` to get the exact key names before calling `setProperties()` on an instance.
 
+37. **Always use the Dropdown Menu DS component for any contextual menu — never hand-build a menu list** — When a three-dot menu, action dropdown, filter panel, or any list of clickable options is needed, use the ZCatalyst Dropdown Menu component (Set Key: `60c79101cb2a0399f9239bd2477634e0591d2e85`). Choose the variant by content type:
+
+    | Use case | Type | Key |
+    |---|---|---|
+    | Plain action list | `Default/Default` | `3d1ebf3b6922fd83cc105463336fcfa86ff22ee2` |
+    | Action list + Create button at bottom | `Default with button/Default` | `caa713142df4bb56fc77beda943be76796c227a2` |
+    | Multi-select with checkboxes | `Multi Select/Default` | `adaf8815d267e85cf95fee7b156965db4030b3b4` |
+    | Multi-select + Create button | `Multi Select with Button/Default` | `e6cf42b1db07deb03bff088dde9f20ec9fe4940d` |
+    | Empty state — no data | `Empty 1/Default` | `47cff4e4c5bf02af575c7fe8fbf28ebe7bbc63a7` |
+    | Small compact list | `Default/Small` | `7739ae70952371c0240a11e1b36455be492551fe` |
+
+    **Text nodes**: `Hello Im Action` (every menu item label — all items share this node name), `Button Text` (the Create/action button in `with button` variants), empty state message text node (`No Data Available. Please Create new.`).
+    **Boolean prop**: `Show Search box#447:0` — set to `true` to enable a search field at the top of the menu.
+    **Sizing**: All Default variants are 379–380px wide. Never hand-set a smaller width — keep the component's natural width.
+
 36. **Always use the LinkBox DS component for any copyable URL or link value** — Whenever a URL, endpoint, connection string, API key, webhook URL, or any value the user should be able to copy is shown on screen, use the ZCatalyst LinkBox component (Set Key: `723d10821d635cb25626fc7e8545b389dbe97bdb`). Never render a copyable link as a raw text node, a plain frame, or a hand-built input with a copy button. Choose the variant by label position:
     - `Top/Default/Default` → label above the URL box: key=`9fbf4fca3a034d19feaee4cde4ab05b3185c2284`
     - `Left/Default/Default` → label to the left: key=`85439b9d41fb8ab6b126543e2a8ba51ba9bce1ff`

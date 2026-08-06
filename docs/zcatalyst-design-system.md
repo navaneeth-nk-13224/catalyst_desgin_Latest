@@ -489,8 +489,9 @@
 - **Set Key**: `60c79101cb2a0399f9239bd2477634e0591d2e85`
 - **Set NodeId**: `444:4342`
 - Variants: Type (Default, Deafult with button, Multi Select, Multi Select with Button, Empty 1, Empty 2), Size (Default, Small)
-- Text nodes: `Default` (title), `Search Here`, `Hello Im Action` (menu items)
-- Boolean props: `Show Search box`
+- Text nodes: `Hello Im Action` (all menu item labels), `Button Text` (Create/action button in `with button` variants), `Search Here` (search input), `No Data Available. Please Create new.` (Empty 1 state message)
+- Boolean props: `Show Search box#447:0` (default: false) — enables search field at top
+- Width: 379–380px (all Default size variants)
 - **Key Variants**:
   - Default/Default: key=`3d1ebf3b6922fd83cc105463336fcfa86ff22ee2`
   - Default with button/Default: key=`caa713142df4bb56fc77beda943be76796c227a2`
